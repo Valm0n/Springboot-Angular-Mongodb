@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Login</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="styleSheet" th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.css}" />
+
+    </head>
+    <body>
+    
+<div class="col-lg-6 col-lg-offset-3">
+    <div class="alert alert-danger" th:if="${param.error}">
+        <i class="glyphicon glyphicon-exclamation-sign" />There was a problem logging in. Please try again.
+    </div>
+    
+    <div class="alert alert-success" th:if="${param.logout}">
+        <i class="glyphicon glyphicon-check" />You have been logged out successfully!
+    </div>
+    
+    <form th:action="@{/login}" method="POST">
+        <div class="form-group">
+            <label for="username">Username:</label> <input type="text"
+                                                           class="form-control" id="username" name="username"/>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label> <input type="password"
+                                                           class="form-control" id="password" name="password"/>
+        </div>
+        <div class="form-group">
+        <input type="submit" value="Sign in" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+    </body>
+</html>
