@@ -16,12 +16,12 @@
             if(this.user === null){
                 return UserResource.get().$promise
                     .then(function (data) {
-                        if (data.name) {
+                        if (data.username) {
                             var currentUser = data;
                             currentUser.hasAuthority = function(authority){
                                 var hasAuthority = false;
-                                currentUser.authorities.some(function(auth){
-                                    if(authority === auth.authority){
+                                currentUser.roles.some(function(role){
+                                    if(authority === role){
                                         hasAuthority = true;
                                         return true;
                                     }

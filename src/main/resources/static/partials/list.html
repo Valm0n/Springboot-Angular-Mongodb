@@ -6,7 +6,7 @@
             </div>
             <div class="panel-body">
                 <div ui-grid="gridOptions" ui-grid-selection class="myGrid"></div>
-                <span ng-if="user.hasAuthority('ROLE_ADMIN')" style='float:right;'><a href ng-click='createOrEditEntry(true)'>Ajouter une entrée</a></span>
+                <span ng-if="user.admin" style='float:right;'><a href ng-click='createOrEditEntry(true)'>Ajouter une entrée</a></span>
             </div>
         </div>
     </div>
@@ -22,12 +22,12 @@
                         <div class="boldName">{{selectedEntry.firstName + ' ' + selectedEntry.lastName}}</div>
                         <div><b>Planète d'origine: </b>{{selectedEntry.race}}</div>
                         <div><b>Affiliation: </b>{{selectedEntry.job}}</div>
-                        <span ng-if="user.hasAuthority('ROLE_ADMIN')" style="float:right;"><a href ng-click="createOrEditEntry(false)">Editer</a></span>
+                        <span ng-if="user.admin" style="float:right;"><a href ng-click="createOrEditEntry(false)">Editer</a></span>
                     </div>
                 </div>
             </div>
         </div>
-        <div ng-if="user.hasAuthority('ROLE_ADMIN')" class="row">
+        <div ng-if="user.admin" class="row">
             <div class="col-lg-12">
                 <div class="panel panel-primary" ng-show="editedEntry">
                     <div class="panel-heading">
