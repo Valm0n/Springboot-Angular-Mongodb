@@ -15,12 +15,16 @@ public class UserController {
     @RequestMapping("/user")
         public User user(Principal user) {
         //return user;
-            UsernamePasswordAuthenticationToken userDetails = (UsernamePasswordAuthenticationToken)user;
-            ArrayList<Role> listAuthorities = new ArrayList<>();
-            for(GrantedAuthority auth : userDetails.getAuthorities()){
-                listAuthorities.add(Role.getRoleByLabel(auth.getAuthority()));
+            if(user != null){
+                UsernamePasswordAuthenticationToken userDetails = (UsernamePasswordAuthenticationToken)user;
+                ArrayList<Role> listAuthorities = new ArrayList<>();
+                for(GrantedAuthority auth : userDetails.getAuthorities()){
+                    listAuthorities.add(Role.getRoleByLabel(auth.getAuthority()));
+                }
+                return new User(listAuthorities, userDetails.getName());
+            } else {
+                return null;
             }
-            return new User(listAuthorities, userDetails.getName());
     }
 //    @RequestMapping("/user")
 //    public User getCurrentUser(Principal user){
