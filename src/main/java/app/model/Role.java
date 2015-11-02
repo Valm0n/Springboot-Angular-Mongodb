@@ -4,10 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Role {
+    ANONYMOUS("ROLE_ANONYMOUS"),
     USER("ROLE_USER"), 
-    ADMIN("ROLE_ADMIN"), 
     READER("ROLE_READER"), 
-    WRITER("ROLE_WRITER");
+    WRITER("ROLE_WRITER"),
+    ADMIN("ROLE_ADMIN");
     
     private static final Map<String, Role> rolesMap = new HashMap<String, Role>();
     static {

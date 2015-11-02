@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package app.config;
+import app.model.Role;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -17,19 +18,13 @@ import org.springframework.stereotype.Component;
  */
 @Component("CustomSecurity")
 public class CustomSecurity {
-    public boolean hasRole(String key) {
+    public boolean hasRole(String expectedRoleValue) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userRoleValue = auth.getAuthorities().toArray()[0].toString();
         
-        Role currentUserRole = Enum.valueOf(Role.class, userRoleValue);
-        Role expectedRole = Enum.valueOf(Role.class, key);
+        Role currentUserRole = Role.getRoleByLabel(userRoleValue);
+        Role expectedRole = Role.getRoleByLabel(expectedRoleValue);
         
         return currentUserRole.ordinal() >= expectedRole.ordinal();
     }
-}
-
-enum Role{
-    ROLE_ANONYMOUS,
-    ROLE_USER,
-    ROLE_ADMIN;
 }
