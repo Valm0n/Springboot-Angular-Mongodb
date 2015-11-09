@@ -11,6 +11,7 @@ import app.repository.CustomerRepository;
 
 import java.util.Arrays;
 import static org.hamcrest.Matchers.hasSize;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -55,12 +56,18 @@ public class CustomerControllerTest {
     @Before
     public void setup() {
         this.mvc = MockMvcBuilders.webAppContextSetup(this.ctx).build();
-        repo.deleteAll();
         han = new Customer("Han", "Solo", "Corellia", "Smuggler", null);
         luke = new Customer("Luke", "Skywalker", "Tatooine", "Farmer", null);
         leia = new Customer("Leia", "Organa", "Alderaan", "Princess", null);
         repo.insert(Arrays.asList(han, luke, leia));
     }  
+    
+    @After
+    public void cleanUp() {
+        repo.delete(han);
+        repo.delete(luke);
+        repo.delete(leia);
+    }
     
     @Test
     public void failToGetCustomersIfNotAllowed() throws Exception {

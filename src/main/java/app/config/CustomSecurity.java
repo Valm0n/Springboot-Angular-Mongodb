@@ -6,6 +6,7 @@
 package app.config;
 import app.model.Role;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +21,8 @@ import org.springframework.stereotype.Component;
 public class CustomSecurity {
     public boolean hasRole(String expectedRoleValue) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String userRoleValue = auth.getAuthorities().toArray()[0].toString();
+        Object[] grr = auth.getAuthorities().toArray();
+        String userRoleValue = grr[grr.length -1].toString();
         
         Role currentUserRole = Role.getRoleByLabel(userRoleValue);
         Role expectedRole = Role.getRoleByLabel(expectedRoleValue);
